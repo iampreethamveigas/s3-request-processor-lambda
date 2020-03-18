@@ -2,35 +2,14 @@ var AWS = require('aws-sdk');
 var glue = new AWS.Glue();
 var s3 = new AWS.S3();
 const lambda = new AWS.Lambda();
-const pg = require('pg')
-const { Pool } = require('pg');
+const dbConfig = require('../config/_config.db')
 
 
 
-/*
-The pool configuration for pg connection
-*/
-const pool = new Pool({
-    host: process.env.db_host,
-    user: process.env.db_user,
-    max: process.env.db_max,
-    idleTimeoutMillis: process.env.db_idle_timeout,
-    connectionTimeoutMillis: process.env.db_connection_timeout,
-})
 
+let batchFlow = false;
+let business_entity;
 
-var batchFlow = false;
-var business_entity;
-
-
-let dbConfig = {
-    user: process.env.db_user,
-    password: process.env.db_pass,
-    database: process.env.db_name,
-    host: process.env.db_host,
-    port: process.env.db_port,
-    schema: process.env.db_schema
-};
 
 var db_host = process.env.db_host;
 
