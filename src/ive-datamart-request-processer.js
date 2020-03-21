@@ -7,23 +7,25 @@ const dbConfig = require('../config/_config.db')
 
 
 
+
+/* Config Strings */
+let db_host = process.env.db_host;
+let db_user = process.env.db_user;
+let db_pass = process.env.db_pass;
+let db_name = process.env.db_name;
+let db_schema = process.env.db_schema;
+
+
+const data = {};
 let batchFlow = false;
 let business_entity;
 
 
-var db_host = process.env.db_host;
-
-
-var db_user = process.env.db_user;
-var db_pass = process.env.db_pass;
-var db_name = process.env.db_name;
-var db_schema = process.env.db_schema;
-const data = {};
 
 module.exports.ive_datamart_request_processer = async (event, callback) => {
 
-    try {
 
+    try {
         var req_id;
         const workDayId = JSON.stringify(event.workDayId);
         console.log('workDayId  ** ' + workDayId);
