@@ -21,7 +21,11 @@ let batchFlow = false;
 let business_entity;
 
 
-
+/**
+ * Module handles processing data from aws.
+ * @param {Object[]} event - event from lambda
+ * @param {string} callback - callback on return.
+ */
 module.exports.ive_datamart_request_processer = async (event, callback) => {
 
 
