@@ -19,7 +19,7 @@ let db_schema = process.env.db_schema;
 const data = {};
 let batchFlow = false;
 let business_entity;
-
+let req_id;
 
 /**
  * Module handles processing data from s3 on cloud watch event.
@@ -30,18 +30,18 @@ module.exports.ive_datamart_request_processer = async (event, callback) => {
 
 
     try {
-        var req_id;
+
         const workDayId = JSON.stringify(event.workDayId);
         console.log('workDayId  ** ' + workDayId);
+
         if (typeof (workDayId) != "undefined") {
             batchFlow = false;
         }
         else {
-
-
             batchFlow = true;
             console.log("Event is null");
         }
+
         var currentdate = new Date();
         //var formattedDate = currentdate.getFullYear().toString() + currentdate.getMonth() + 1 + (currentdate.getDate()) + currentdate.getHours() + currentdate.getMinutes() + currentdate.getSeconds() + currentdate.getMilliseconds();
         var formattedDate = currentdate.getFullYear() +
@@ -74,8 +74,8 @@ module.exports.ive_datamart_request_processer = async (event, callback) => {
 
         if (batchFlow == true) {
 
-            /** Business Enity for batch flow 
-             * Reading the business enitity from the file in s3 bucket
+            /** Business Entity for batch flow 
+             * Reading the business entity from the file in s3 bucket
             **/
 
             var bucket = event.Records[0].s3.bucket.name;
@@ -245,9 +245,7 @@ module.exports.ive_datamart_request_processer = async (event, callback) => {
         };
         console.log("input to job 4** " + input);
 
-
         var triggerbucket = 'ive-trigger-nqc-req';
-
         const putfileToS3 = (triggerbucket, key, data) => {
             return new Promise((resolve, reject) => {
                 {
