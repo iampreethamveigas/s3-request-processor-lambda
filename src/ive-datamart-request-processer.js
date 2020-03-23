@@ -22,7 +22,7 @@ let business_entity;
 
 
 /**
- * Module handles processing data from aws.
+ * Module handles processing data from s3 on cloud watch event.
  * @param {Object[]} event - event from lambda
  * @param {string} callback - callback on return.
  */
